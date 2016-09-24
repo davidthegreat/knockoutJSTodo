@@ -7,6 +7,25 @@
 	<script type='text/javascript' src='js/knockout-3.4.0.js'></script>
 	<script type="text/javascript">
 		$(function(){
+			var appViewModel = function()
+			{
+				var self = this;
+
+				self.todos = ko.observableArray([{
+					item: "Walk the dog"
+				},
+					{
+						item: "Clean my room"
+					}])
+
+				self.newTodo = ko.observable("");
+				self.addNewTodo = function(){
+					self.todos.push({item: self.newTodo()});
+					self.newTodo("");
+				}
+			}
+
+			ko.applyBindings(new appViewModel())
 
 		})
 	</script>
@@ -16,6 +35,12 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h3>Todo App</h3>
+				<div data-bind="foreach: todos">
+					<input type="text" data-bind="value: item"/>
+					<br>
+				</div>		
+					<input type="text" placeholder="add new todo" data-bind="value: newTodo">
+					<a href="#" class="btn btn-large btn-primary" data-bind="click: addNewTodo" >add</a>
 		</div>
 	</div>
 
