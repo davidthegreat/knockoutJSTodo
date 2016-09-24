@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">	
+	<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"><link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type='text/javascript' src='js/knockout-3.4.0.js'></script>
 	<script type="text/javascript">
@@ -23,6 +23,9 @@
 					self.todos.push({item: self.newTodo()});
 					self.newTodo("");
 				}
+				self.removeTodo = function(){
+					self.todos.remove(this)
+				}
 			}
 
 			ko.applyBindings(new appViewModel())
@@ -37,6 +40,7 @@
 			<h3>Todo App</h3>
 				<div data-bind="foreach: todos">
 					<input type="text" data-bind="value: item"/>
+					<a href="#" class="icon-trash" data-bind="click: $parent.removeTodo"><i class="fa fa-trash"></i></a>
 					<br>
 				</div>		
 					<input type="text" placeholder="add new todo" data-bind="value: newTodo">
